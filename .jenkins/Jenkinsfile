@@ -14,7 +14,6 @@ pipeline {
                     -v ./:/app
                     -w /app
                     '''
-
                     reuseNode true
                 }
             }
