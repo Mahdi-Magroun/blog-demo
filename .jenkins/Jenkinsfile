@@ -17,13 +17,16 @@ pipeline {
              steps {
                     echo "building .... "
                     sh '''
-                        composer install
+                        composer install --no-interaction 
+                        composer dump-autoload
+                        composer dump-env prod
                      ''' 
             }
         }
         stage('Test') {
             steps {
                  echo "testing ... "
+                 sh "ls -la"
             }
         }
         stage('Deploy') {
