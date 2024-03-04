@@ -35,7 +35,22 @@ pipeline {
                    
             }
         }
-         stage('Pushing to registry ') {
+          stage('Testing') {
+              docker{
+                    image 'mahdi0188/e-commerce:latest'
+                    args '''
+                    -w /var/www/html/back-end
+                    '''
+
+                    reuseNode true
+                }
+            steps {
+                 echo "Testing ... "
+                 sh "./bin/phpunit"
+                   
+            }
+        }
+         stage('Pushing To Registry ') {
              
             steps {
                  echo "Pushing ... "
@@ -45,9 +60,17 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Dev') {
             steps {
                  echo "deploying ... "
+                 // here do not forget to lanch database migrations
+            }
+        }
+
+         stage('Deploy Prod') {
+            steps {
+                 echo "deploying ... "
+                 // here do not forget to lanch database migrations
             }
         }
     }
