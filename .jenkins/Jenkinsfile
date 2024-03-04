@@ -2,8 +2,22 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
-               echo "building ... "
+           
+               agent{
+                docker{
+                    image 'composer:2.7.1'
+                    args '''
+                    -v ./:/app
+                    -w /app
+                    '''
+                    reuseNode true
+                }
+            }
+             steps {
+                    echo "building .... "
+                    sh '''
+                        composer dump-env prod  
+                     ''' 
             }
         }
         stage('Test') {
