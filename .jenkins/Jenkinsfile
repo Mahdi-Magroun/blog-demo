@@ -36,6 +36,7 @@ pipeline {
             }
         }
           stage('Testing') {
+            agent{
               docker{
                     image 'mahdi0188/e-commerce:latest'
                     args '''
@@ -44,6 +45,7 @@ pipeline {
 
                     reuseNode true
                 }
+            }
             steps {
                  echo "Testing ... "
                  sh "./bin/phpunit"
