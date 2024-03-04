@@ -1,7 +1,11 @@
 pipeline {
     agent any
+      environment {
+        // vist this https://www.jenkins.io/doc/book/pipeline/syntax/#environment
+        REGISTRY_CREDS=credentials('dockerhub-mahdi-magroun')
+    }
     stages {
-        stage('Build') {
+        stage('Preparation') {
            
                agent{
                 docker{
@@ -15,20 +19,32 @@ pipeline {
                 }
             }
              steps {
-                    echo "building .... "
+                    echo "Preparing code .... "
                     sh '''
-                        composer install --no-interaction 
-                        composer dump-autoload
-                        composer dump-env prod
+                        composer install --no-interaction --no-dev --optimize-autoloader  
+                 
                      ''' 
+                     //        APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
             }
         }
-        stage('Test') {
+        stage('Build') {
+             
             steps {
-                 echo "testing ... "
-                 sh "ls -la"
+                 echo "Building ... "
+                 sh "docker build -t mahdi0188/e-commerce:latest ."
+                   
             }
         }
+         stage('Pushing to registry ') {
+             
+            steps {
+                 echo "Pushing ... "
+                  sh 'docker login -u $REGISTRY_CREDS_USR -p $REGISTRY_CREDS_PSW'
+                  sh "docker push mahdi0188/spring-boot-docker:latest"
+                   
+            }
+        }
+
         stage('Deploy') {
             steps {
                  echo "deploying ... "
