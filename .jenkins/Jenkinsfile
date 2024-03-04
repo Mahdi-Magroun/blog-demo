@@ -31,14 +31,14 @@ pipeline {
              
             steps {
                  echo "Building ... "
-                 sh "docker build -t mahdi0188/e-commerce:latest ."
+                 sh "docker build -t mahdi0188/symfony-blog:latest ."
                    
             }
         }
           stage('Testing') {
             agent{
               docker{
-                    image 'mahdi0188/e-commerce:latest'
+                    image 'mahdi0188/symfony-blog:latest'
                     args '''
                     -w /var/www/html/back-end
                     '''
