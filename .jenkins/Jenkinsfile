@@ -5,19 +5,19 @@ pipeline {
            
                agent{
                 docker{
-                    image 'composer:2.7.1'
+                    image 'composer:latest'
                     args '''
                     -v ./:/app
                     -w /app
-                     bash
                     '''
+
                     reuseNode true
                 }
             }
              steps {
                     echo "building .... "
                     sh '''
-                        composer dump-env prod  
+                        composer install
                      ''' 
             }
         }
