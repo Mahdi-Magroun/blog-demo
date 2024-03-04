@@ -9,6 +9,7 @@ pipeline {
                     args '''
                     -v ./:/app
                     -w /app
+                     bash
                     '''
                     reuseNode true
                 }
