@@ -13,4 +13,15 @@ COPY ./ /var/www/html/back-end
 ARG $APP_ENV="prod"
 ENV APP_ENV=$APP_NEV
 
+ARG $user
+ENV blog_user=$blog_db_user_dev
+
+ARG $blog_db_password_prod
+ENV db_pwd=$blog_db_password_prod
+ARG $blog_host
+ENV host=$blog_host
+ARG $blog_port
+ENV host=$blog_port
+
+
 EXPOSE 80
