@@ -37,6 +37,8 @@ pipeline {
                    }
                    else{
                      sh "docker exec -it mahdi0188/symfony-blog:latest '$APP_ENV=test;php bin/console cache:clear'"
+                   }
+                 }
             }
         }
           stage('Testing') {
