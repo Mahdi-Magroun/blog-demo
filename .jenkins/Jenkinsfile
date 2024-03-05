@@ -26,6 +26,7 @@ pipeline {
              steps {
                     echo "Preparing code .... "
                     sh '''
+                    env
                         composer install --no-interaction --no-dev --optimize-autoloader 
                  
                      ''' 
