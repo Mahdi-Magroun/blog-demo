@@ -14,9 +14,9 @@ pipeline {
                     -v ./:/app
                     -w /app
                     -e  APP_ENV=prod 
-                    -e db_user=mahdi\
-                    -e  db_pwd=passowrdwaaa \
-                    -e db_host=11111.1111.1111 \
+                    -e db_user=${env.blog_db_user_prod} \
+                    -e  db_pwd=${env.blog_db_password_prod} \
+                    -e db_host=${env.blog_host} \
                     -e db_port=${env.blog_port} \
                     -e db=${env.blog_dbname_prod} \
                     '''
@@ -51,12 +51,12 @@ pipeline {
 
                    }
                    else{
-             sh '''docker build  --build-arg APP_ENV=prod \
-                        --build-arg db_user="yallah_chabeb" \
-                          --build-arg db_pwd=${blog_db_password_prod} \
-                        --build-arg db_host=${blog_host} \
-                           --build-arg db_port=${blog_port} \
-                        --build-arg db=${blog_dbname_prod} \
+                    sh '''docker build  -e APP_ENV=test \
+                        -e db_user=${env.blog_db_user_dev} \
+                          -e db_pwd=${env.blog_db_password_dev} \
+                        -e db_host=${env.blog_host} \
+                          -e db_port=${env.blog_port} \
+                       -e db=${env.blog_dbname_dev} \
                      -t mahdi0188/symfony-blog:latest .
                      '''
 
