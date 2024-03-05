@@ -10,4 +10,7 @@ RUN  apt update \
     && apt install -y curl libpng-dev libjpeg62-turbo-dev libfreetype6-dev libcurl4-openssl-dev zlib1g libzip-dev \
     && docker-php-ext-install curl gd zip pdo_mysql
 COPY ./ /var/www/html/back-end
+ARG $APP_ENV="prod"
+ENV APP_ENV=$APP_NEV
+
 EXPOSE 80
