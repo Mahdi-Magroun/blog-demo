@@ -51,14 +51,15 @@ pipeline {
 
                    }
                    else{
-                    sh '''docker build  --build-arg APP_ENV=test \
-                        --build-arg db_user=${env.blog_db_user_dev} \
-                          --build-arg db_pwd=${env.blog_db_password_dev} \
-                        --build-arg db_host=${env.blog_host} \
-                           --build-arg db_port=${env.blog_port} \
-                        --build-arg db=${env.blog_dbname_dev} \
-                     -t mahdi0188/symfony-blog:latest .
-                     '''
+                   sh '''docker build \
+  --build-arg APP_ENV=test \
+  --build-arg db_user=${{ env.blog_db_user_dev }} \
+  --build-arg db_pwd=${{ env.blog_db_password_dev }} \
+  --build-arg db_host=${{ env.blog_host }} \
+  --build-arg db_port=${{ env.blog_port }} \
+  --build-arg db=${{ env.blog_dbname_dev }} \
+  -t mahdi0188/symfony-blog:latest .
+'''
 
                    }
 
