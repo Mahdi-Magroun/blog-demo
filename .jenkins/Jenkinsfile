@@ -13,6 +13,12 @@ pipeline {
                     args '''
                     -v ./:/app
                     -w /app
+                    -e  APP_ENV=prod 
+                    -e db_user=${blog_db_user_prod} \
+                    -e  db_pwd=${blog_db_password_prod} \
+                    -e db_host=${blog_host} \
+                    -e db_port=${blog_port} \
+                    -e db=${blog_dbname_prod} \
                     '''
                     reuseNode true
                 }
@@ -20,7 +26,7 @@ pipeline {
              steps {
                     echo "Preparing code .... "
                     sh '''
-                        composer install --no-interaction --no-dev 
+                        composer install --no-interaction --no-dev --optimize-autoloader 
                  
                      ''' 
                      //        APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
