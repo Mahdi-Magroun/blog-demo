@@ -60,6 +60,23 @@ pipeline {
                    
             }
         }
+        stage('Database Migrations') {
+            agent{
+              docker{
+                    image 'mahdi0188/symfony-blog:latest'
+                    args '''
+                    -w /var/www/html/back-end
+                    '''
+
+                    reuseNode true
+                }
+            }
+            steps {
+                 echo "Migrating ... "
+                 sh "bin / console doctrine: schema: update –force"
+                 sh "php bin/console doctrine:migrations:migrate"
+            }
+        }
          stage('Pushing To Registry ') {
              
             steps {
@@ -76,7 +93,10 @@ pipeline {
             }
             steps {
                  echo "deploying into development envirement  ... "
-                 // here do not forget to lanch database migrations
+               /**
+               * connect to docker container 
+               * 
+               */
             }
         }
 
