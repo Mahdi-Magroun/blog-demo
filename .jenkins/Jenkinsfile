@@ -33,10 +33,12 @@ pipeline {
                  sh "docker build -t mahdi0188/symfony-blog:latest ."
                  script {
                    if(env.BRANCH_NAME == 'main'){
-                     sh "docker exec -it mahdi0188/symfony-blog:latest '$APP_ENV=prod;$APP_DEBUG=0;php bin/console cache:clear'"
+                    sh "docker exec -it mahdi0188/symfony-blog:latest sh -c 'APP_ENV=prod APP_DEBUG=0 php composer dump-env prod && php bin/console cache:clear'"
+
                    }
                    else{
-                     sh "docker exec -it mahdi0188/symfony-blog:latest '$APP_ENV=test;php bin/console cache:clear'"
+                    sh "docker exec -it mahdi0188/symfony-blog:latest sh -c 'APP_ENV=test APP_DEBUG=0 php composer dump-env prod && php bin/console cache:clear'"
+
                    }
                  }
             }
