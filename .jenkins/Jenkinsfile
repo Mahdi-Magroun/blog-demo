@@ -20,7 +20,7 @@ pipeline {
              steps {
                     echo "Preparing code .... "
                     sh '''
-                        composer install --no-interaction --no-dev --optimize-autoloader  
+                        composer install --no-interaction --no-dev 
                  
                      ''' 
                      //        APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear

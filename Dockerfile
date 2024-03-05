@@ -23,5 +23,7 @@ ENV host=$blog_host
 ARG $blog_port
 ENV host=$blog_port
 
-
+# opteminize the image
+RUN composer install --no-dev --optimize-autoloader \
+&& composer dump-autoload --optimize \
 EXPOSE 80
