@@ -18,7 +18,7 @@ pipeline {
                     -e  db_pwd=${env.blog_db_password_prod} \
                     -e db_host=${env.blog_host} \
                     -e db_port=${env.blog_port} \
-                    -e db=${env.blog_dbname_prod} \
+                    -e db=${env.blog_dbname_p   rod} \
                     """
                     reuseNode true
                 }
@@ -27,7 +27,7 @@ pipeline {
                     echo "Preparing code .... "
                     sh '''
                     env
-                        composer install --no-interaction --no-dev --optimize-autoloader 
+                        composer install --no-interaction --no-dev  
                  
                      ''' 
                      //        APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
