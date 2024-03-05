@@ -18,7 +18,7 @@ pipeline {
                     -e  db_pwd=${env.blog_db_password_prod} \
                     -e db_host=${env.blog_host} \
                     -e db_port=${env.blog_port} \
-                    -e db=${env.blog_dbname_p   rod} \
+                    -e db=${env.blog_dbname_prod} \
                     """
                     reuseNode true
                 }
