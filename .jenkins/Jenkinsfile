@@ -52,14 +52,14 @@ pipeline {
 
                    }
                    else{
-                    sh '''docker build  -e APP_ENV=test \
+                    sh """docker build  -e APP_ENV=test \
                         -e db_user=${env.blog_db_user_dev} \
                           -e db_pwd=${env.blog_db_password_dev} \
                         -e db_host=${env.blog_host} \
                           -e db_port=${env.blog_port} \
                        -e db=${env.blog_dbname_dev} \
                      -t mahdi0188/symfony-blog:latest .
-                     '''
+                     """
 
                    }
 
