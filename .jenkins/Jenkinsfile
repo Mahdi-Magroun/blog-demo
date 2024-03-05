@@ -33,11 +33,11 @@ pipeline {
                 
                  script {
                    if(env.BRANCH_NAME == 'main'){
-                  sh "docker build  --build_arg APP_ENV=prod -t mahdi0188/symfony-blog:latest ."
+                  sh "docker build  --build-arg APP_ENV=prod -t mahdi0188/symfony-blog:latest ."
 
                    }
                    else{
-                    sh "docker build  --build_arg APP_ENV=test -t mahdi0188/symfony-blog:latest ."
+                    sh "docker build  --build-arg APP_ENV=test -t mahdi0188/symfony-blog:latest ."
 
                    }
                  }
