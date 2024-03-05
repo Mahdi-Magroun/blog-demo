@@ -62,15 +62,21 @@ pipeline {
         }
 
         stage('Deploy Dev') {
+            when {
+                branch "develop"
+            }
             steps {
-                 echo "deploying ... "
+                 echo "deploying into development envirement  ... "
                  // here do not forget to lanch database migrations
             }
         }
 
          stage('Deploy Prod') {
+              when {
+                branch "main"
+            }
             steps {
-                 echo "deploying ... "
+                echo "deploying into production envirement  ... "
                  // here do not forget to lanch database migrations
             }
         }
