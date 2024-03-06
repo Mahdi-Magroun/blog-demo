@@ -97,7 +97,8 @@ pipeline {
             }
             steps {
                  echo "Migrating ... "
-                 sh "php bin/console doctrine:schema: update –force"
+                 sh "php bin/console doctrine:migrations:diff"
+                 echo "migrating .........................................................."
                  sh "php bin/console doctrine:migrations:migrate"
 
             }
