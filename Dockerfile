@@ -10,19 +10,21 @@ RUN  apt update \
     && apt install -y curl libpng-dev libjpeg62-turbo-dev libfreetype6-dev libcurl4-openssl-dev zlib1g libzip-dev \
     && docker-php-ext-install curl gd zip pdo_mysql
 COPY ./ /var/www/html/back-end
-ARG $APP_ENV="prod"
-ENV APP_ENV=$APP_NEV
+# Set environment variables
+ARG APP_ENV="prod"
+ENV APP_ENV=$APP_ENV
 
-ARG $user
-ENV blog_user=$blog_db_user_dev
+ARG blog_user
+ENV blog_user=$blog_user
 
-ARG $blog_db_password_prod
+ARG blog_db_password_prod
 ENV db_pwd=$blog_db_password_prod
-ARG $blog_host
+
+ARG blog_host
 ENV host=$blog_host
-ARG $blog_port
-ENV host=$blog_port
-# install composer
+
+ARG blog_port
+ENV port=$blog_port
 RUN apt install -y git
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
