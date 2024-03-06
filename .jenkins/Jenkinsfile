@@ -101,6 +101,7 @@ pipeline {
                     script {
                         def migration = sh(script: "php bin/console doctrine:migrations:diff --no-interaction", returnStatus: true)
                         sh 'ls -la ./migrations/'
+                        sg 'cat ./migrations/*'
                         if( migration == 0){
                             echo "No migration needed"
                         }
