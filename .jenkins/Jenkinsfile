@@ -35,14 +35,10 @@ pipeline {
                 
                  script {
                    if(env.BRANCH_NAME == 'main'){
-                   sh '''docker build  --build-arg APP_ENV=prod \
-                        --build-arg db_user=${blog_db_user_prod} \
-                          --build-arg db_pwd=${blog_db_password_prod} \
-                        --build-arg db_host=${blog_host} \
-                           --build-arg db_port=${blog_port} \
-                        --build-arg db=${blog_dbname_prod} \
+                   sh """ docker build  --build-arg APP_ENV=prod \
+                        --build-arg db_conn=${blog_db_url_prod} \
                      -t mahdi0188/symfony-blog:latest .
-                     '''
+                     """
 
 
                    }
