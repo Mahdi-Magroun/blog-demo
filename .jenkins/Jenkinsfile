@@ -13,12 +13,6 @@ pipeline {
                     args """
                     -v ./:/app
                     -w /app
-                    -e  APP_ENV=prod 
-                    -e db_user=${env.blog_db_user_prod} \
-                    -e  db_pwd=${env.blog_db_password_prod} \
-                    -e db_host=${env.blog_host} \
-                    -e db_port=${env.blog_port} \
-                    -e db=${env.blog_dbname_prod} \
                     """
                     reuseNode true
                 }
@@ -54,11 +48,7 @@ pipeline {
                    }
                    else{
                      sh """ docker build  --build-arg APP_ENV=prod \
-                        --build-arg db_user=${blog_db_user_prod} \
-                          --build-arg db_pwd=${blog_db_password_prod} \
-                        --build-arg db_host=${blog_host} \
-                           --build-arg db_port=${blog_port} \
-                        --build-arg db=${blog_dbname_prod} \
+                        --build-arg db_conn=${blog_db_url_dev} \
                      -t mahdi0188/symfony-blog:latest .
                      """
 
@@ -100,7 +90,6 @@ pipeline {
                     echo "migrating .........................................................."
                     script {
                         def migration = sh(script: "php bin/console doctrine:migrations:diff --no-interaction", returnStatus: true)
-                        sh 'ls -la ./migrations/'
                         sh 'cat ./migrations/*'
                         if( migration == 0){
                             echo "No migration needed"

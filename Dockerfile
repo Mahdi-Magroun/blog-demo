@@ -12,19 +12,9 @@ RUN  apt update \
 COPY ./ /var/www/html/back-end
 # Set environment variables
 ARG APP_ENV="prod"
-ENV APP_ENV=$APP_ENV
 
-ARG blog_user
-ENV blog_user=$blog_user
-
-ARG blog_db_password_prod
-ENV db_pwd=$blog_db_password_prod
-
-ARG blog_host
-ENV host=$blog_host
-
-ARG blog_port
-ENV port=$blog_port
+ARG db_con
+ENV blog_db_url=$db_con
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
 USER root
 RUN chown -R www-data:www-data /var/www/html/back-end
