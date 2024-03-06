@@ -13,6 +13,7 @@ pipeline {
                     args """
                     -v ./:/app
                     -w /app
+                    --user 1000:1000
                     -e  APP_ENV=prod 
                     -e db_user=${env.blog_db_user_prod} \
                     -e  db_pwd=${env.blog_db_password_prod} \
@@ -27,6 +28,7 @@ pipeline {
                     echo "Preparing code .... "
                     sh '''
                     env
+                         docker-php-ext-install pdo_mysql
                         composer install --no-interaction --no-dev  
                  
                      ''' 
