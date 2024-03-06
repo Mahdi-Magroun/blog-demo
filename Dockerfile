@@ -31,7 +31,7 @@ RUN chown -R www-data:www-data /var/www/html/back-end
 WORKDIR /var/www/html/back-end
 USER www-data
 RUN composer install --no-dev --optimize-autoloader  
-RUN rm ./migrations/*
+RUN rm ./migrations/* || true
 # opteminize the image
 
 EXPOSE 80
