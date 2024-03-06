@@ -27,6 +27,7 @@ ARG blog_port
 ENV port=$blog_port
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
 USER www-data
+RUN chmod 777 -R /var/www/html/back-end
 WORKDIR /var/www/html/back-end
 RUN composer install --no-dev --optimize-autoloader  
 
