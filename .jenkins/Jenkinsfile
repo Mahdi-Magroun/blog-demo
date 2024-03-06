@@ -27,7 +27,8 @@ pipeline {
                     echo "Preparing code .... "
                     sh '''
                     env
-                         docker-php-ext-install pdo_mysql
+
+                      su -c "docker-php-ext-install pdo_mysql" root
                         composer install --no-interaction --no-dev  
                  
                      ''' 
