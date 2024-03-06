@@ -99,11 +99,13 @@ pipeline {
                  echo "Migrating ... "
                     echo "migrating .........................................................."
                     script {
-                        if(sh "php bin/console doctrine:migrations:diff" != 0){
-                            sh "php bin/console doctrine:migrations:migrate"
+                        def migration = sh(script: "php bin/console doctrine:migrations:diff --no-interaction", returnStatus: true)
+                        if( migration == 0){
+                            echo "No migration needed"
                         }
                         else{
-                            echo "No migration needed"
+                             sh "php bin/console doctrine:migrations:migrate"
+                           
                         }
                     }
                  
