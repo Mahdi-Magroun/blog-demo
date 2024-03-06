@@ -24,7 +24,13 @@ ARG $blog_port
 ENV host=$blog_port
 # install composer
 SHELL ["/bin/bash", "-c"]
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"\
+&& php composer-setup.php \
+&& php -r "unlink('composer-setup.php');" \
+&& mv composer.phar /usr/local/bin/composer
+# install the dependecies
+RUN composer install --no-dev --optimize-autoloader
+
 
 # opteminize the image
 
