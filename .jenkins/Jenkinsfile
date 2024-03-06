@@ -89,10 +89,10 @@ pipeline {
                         def migration = sh(script: "php bin/console doctrine:migrations:diff --no-interaction", returnStatus: true)
                         sh 'cat ./migrations/*'
                         if( migration == 0){
-                            echo "No migration needed"
+                          sh "php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration " 
                         }
                         else{
-                             sh "php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration " 
+                           sh "no migration to apply"
                            
                         }
                     }
