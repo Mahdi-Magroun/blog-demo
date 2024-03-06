@@ -97,9 +97,19 @@ pipeline {
             }
             steps {
                  echo "Migrating ... "
-                 sh "php bin/console doctrine:migrations:diff"
-                 echo "migrating .........................................................."
-                 sh "php bin/console doctrine:migrations:migrate"
+                    echo "migrating .........................................................."
+                    script {
+                        if(sh "php bin/console doctrine:migrations:diff" != 0){
+                            sh "php bin/console doctrine:migrations:migrate"
+                        }
+                        else{
+                            echo "No migration needed"
+                        }
+                    }
+                 
+                 
+              
+                 
 
             }
         }
