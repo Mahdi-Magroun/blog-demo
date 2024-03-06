@@ -23,7 +23,7 @@ ENV host=$blog_host
 ARG $blog_port
 ENV host=$blog_port
 # install composer
-RUN curl -sS https://getcomposer.org/installer | php --  --filename=composer
+RUN curl -sS https://getcomposer.org/installer
 
 # opteminize the image
 
