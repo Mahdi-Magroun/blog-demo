@@ -20,6 +20,7 @@ pipeline {
                     -e db_host=${env.blog_host} \
                     -e db_port=${env.blog_port} \
                     -e db=${env.blog_dbname_prod} \
+                    --entrypoint 'bash /docker-entrypoint.sh'
                     """
                     reuseNode true
                 }
