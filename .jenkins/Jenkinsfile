@@ -108,7 +108,7 @@ pipeline {
             steps {
                  echo "Pushing ... "
                   sh 'docker login -u $REGISTRY_CREDS_USR -p $REGISTRY_CREDS_PSW'
-                  sh "docker push mahdi0188/symfony-blog-final:latest"
+                  sh "docker push mahdi0188/symfony-blog:latest"
                    
             }
         }
