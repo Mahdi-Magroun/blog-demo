@@ -92,7 +92,7 @@ pipeline {
                           sh "php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration " 
                         }
                         else{
-                           sh "no migration to apply"
+                           echo  "no migration to apply"
                            
                         }
                     }
