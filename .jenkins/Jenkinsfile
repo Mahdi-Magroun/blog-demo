@@ -85,7 +85,7 @@ pipeline {
                  echo "Migrating ... "
                     echo "migrating .........................................................."
                     script {
-                        sh 'php bin/console cache:clear'
+                        
                         def migration = sh(script: "php bin/console doctrine:migrations:diff --no-interaction", returnStatus: true)
                         sh 'cat ./migrations/*'
                         if( migration == 0){
