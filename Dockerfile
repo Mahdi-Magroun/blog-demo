@@ -13,8 +13,8 @@ COPY ./ /var/www/html/back-end
 # Set environment variables
 ARG APP_ENV="prod"
 
-ARG db_con
-ENV blog_db_url=$db_con
+ARG db_conn
+ENV blog_db_url=$db_conn
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer 
 USER root
 RUN chown -R www-data:www-data /var/www/html/back-end
